@@ -1,0 +1,4 @@
+#ifndef CONFIG_H
+#define PACKAGE_DATADIR "@PKGDATADIR@"
+#define PACKAGE_VERSION "0.1"
+#endif /* CONFIG_H */

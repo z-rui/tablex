@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component>
+	<name>org.freedesktop.IBus.TableX</name>
+	<description>TableX input method</description>
+	<exec>@PKGDATADIR@/ibus --ibus</exec>
+	<version>0.1</version>
+	<author>Rui Zhang &lt;zrui16@hotmail.com&gt;</author>
+	<license>MIT</license>
+	<homepage></homepage>
+	<textdomain>ibus-tablex</textdomain>
+
+	<engines>
+		<engine>
+			<name>tablex:py</name>
+			<language>zh</language>
+			<license>MIT</license>
+			<author>
+                        Rui Zhang &lt;zrui16@hotmail.com&gt;
+                        </author>
+			<layout>default</layout>
+			<longname>Dumb Pinyin</longname>
+			<description>A Pinyin input method without any "intelligent" features</description>
+			<symbol>&#x4e2d;</symbol> <!-- 中 -->
+			<icon_prop_key>state</icon_prop_key>
+		</engine>
+		<engine>
+			<name>tablex:tex</name>
+			<language>other</language>
+			<license>MIT</license>
+			<author>
+                        Rui Zhang &lt;zrui16@hotmail.com&gt;
+                        </author>
+			<layout>default</layout>
+			<longname>TeX</longname>
+			<description>A Table-based input method for TeX Symbols</description>
+			<symbol>TeX</symbol>
+			<icon_prop_key>state</icon_prop_key>
+		</engine>
+	</engines>
+</component>
