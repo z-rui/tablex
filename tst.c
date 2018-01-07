@@ -54,33 +54,20 @@ tst_link_node(struct tst_node *n, struct tst_node *parent,
 	*link = n;
 }
 
-static struct tst_node *rightmost(struct tst_node *n)
-{
-	for (;;) {
-		if (n->r)
-			n = n->r;
-		else if (n->m)
-			n = n->m;
-		else
-			break;
-	}
-	return n;
-}
-
 struct tst_node *
 tst_prev(struct tst_node *n)
 {
 	if (n->l)
-		return rightmost(n->l);
+		return tst_max(n->l);
 	for (;;) {
 		struct tst_node *p;
 
 		if (!(p = n->p))
 			return 0;
 		if (p->r == n)
-			return (p->m) ? rightmost(p->m) : p;
-		else if (p->m == n && p->l)
-			return rightmost(p->l);
+			return (p->m) ? tst_max(p->m) : p;
+		if (p->m == n && p->l)
+			return tst_max(p->l);
 		n = p;
 	}
 }
