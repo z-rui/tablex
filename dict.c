@@ -134,6 +134,33 @@ static void tnode_free(struct tst_node *n)
 	free(container_of(n, struct tnode, tst));
 }
 
+void dict_load_line(struct dict *d, const char *line, size_t len)
+{
+	char *buf;
+	char *kseq, *cseq;
+	struct tnode_leaf *tn;
+	struct cnode *cn;
+
+	buf = malloc(len + 1);
+	memcpy(buf, line, len);
+	buf[len] = '\0';
+
+	kseq = strtok(buf, " ");
+	tn = dict_mkpath(d, kseq);
+	cseq = strtok(0, " ");
+	if (!cseq) { /* invalid line */
+		free(buf);
+		return;
+	}
+	do {
+		cn = malloc(sizeof *cn);
+		cn->parent = (struct tnode *) tn;
+		cn->kseq = kseq;
+		cn->cseq = cseq;
+		dict_add_leaf(d, cn, tn);
+	} while ((cseq = strtok(0, " ")));
+}
+
 void dict_finalize(struct dict *d)
 {
 	struct cnode *cn, *next;
@@ -143,7 +170,6 @@ void dict_finalize(struct dict *d)
 		next = cn->next;
 		if (!next || next->kseq != cn->kseq)
 			free(cn->kseq);
-		free(cn->cseq);
 		free(cn);
 	}
 }

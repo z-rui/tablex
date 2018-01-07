@@ -7,33 +7,18 @@
 void edit_load(struct edit *e, const char *path)
 {
 	FILE *f;
-	struct dict *d;
 	char buf[4096];
 
-	d = &e->d;
 	f = fopen(path, "r");
 	if (!f)
 		return;
 	while (fgets(buf, sizeof buf, f)) {
 		size_t len;
-		char *kseq, *cseq;
-		struct tnode_leaf *tn;
-		struct cnode *cn;
 
 		len = strlen(buf);
 		if (len > 0 && buf[len-1] == '\n')
-			buf[len-1] = '\0';
-		kseq = strtok(buf, " ");
-		if (!kseq) continue;
-		kseq = strdup(kseq);
-		tn = dict_mkpath(d, kseq);
-		while ((cseq = strtok(0, " "))) {
-			cn = malloc(sizeof *cn);
-			cn->parent = (struct tnode *) tn;
-			cn->kseq = kseq;
-			cn->cseq = strdup(cseq);
-			dict_add_leaf(d, cn, tn);
-		}
+			len--;
+		dict_load_line(&e->d, buf, len);
 	}
 	fclose(f);
 }

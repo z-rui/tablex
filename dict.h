@@ -32,8 +32,7 @@ struct cnode {
 extern struct tnode *tnode_find_step(struct tnode *, unsigned);
 
 extern void dict_rotate(struct dict *, struct tnode_leaf *);
-extern void dict_add_leaf(struct dict *, struct cnode *, struct tnode_leaf *);
-extern struct tnode_leaf *dict_mkpath(struct dict *, const char *);
+extern void dict_load_line(struct dict *, const char *, size_t);
 extern void dict_finalize(struct dict *);
 
 /* for debugging use */
