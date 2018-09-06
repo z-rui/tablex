@@ -207,14 +207,15 @@ namespace TableX {
 		{
 			lookup_table.clear();
 			if (editor.empty()) {
-				update_lookup_table(lookup_table, false);
-				//var empty = new IBus.Text.from_static_string("");
-				//update_auxiliary_text(empty, true);
-				//update_preedit_text(empty, 0, true);
+				hide_lookup_table();
 				hide_auxiliary_text();
 				hide_preedit_text();
 			} else {
 				editor.show();
+				// (weird bug)
+				// the candidate windows some times does not follow the cursor
+				// if the call to update_lookup_table is not duplicated
+				update_lookup_table(lookup_table, true);
 				update_lookup_table(lookup_table, true);
 			}
 		}
@@ -272,11 +273,8 @@ public void edit_buffer(void *data, string s, int len)
 	unowned TableX.Engine engine = (TableX.Engine) data;
 	var text = new IBus.Text.from_string(s);
 
-	// (weird bug)
-	// the candidate windows does not follow the cursor
-	// sometimes, if one of the following is omitted.
 	engine.update_preedit_text(text, text.get_length(), true);
-	engine.update_auxiliary_text(text, true);
+	//engine.update_auxiliary_text(text, true);
 }
 
 public int edit_candidate(void *data, string s, string hint)
