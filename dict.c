@@ -144,12 +144,12 @@ void dict_load_line(struct dict *d, const char *line, size_t len)
 	buf[len] = '\0';
 
 	kseq = strtok(buf, " ");
-	tn = dict_mkpath(d, kseq);
 	cseq = strtok(0, " ");
 	if (!cseq) { /* invalid line */
 		free(buf);
 		return;
 	}
+	tn = dict_mkpath(d, kseq);
 	do {
 		cn = malloc(sizeof *cn);
 		cn->kseq = kseq;
