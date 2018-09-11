@@ -17,7 +17,7 @@ extern struct tst_node *tst_max(struct tst_node *);
 
 extern void tst_link_node(struct tst_node *, struct tst_node *,
 		struct tst_node **);
-extern struct tst_node * tst_prev(struct tst_node *n);
+extern struct tst_node * tst_prev(struct tst_node *);
 extern void tst_splay(struct tst_node *, struct tst_node **);
 
 #endif /* TST_H */

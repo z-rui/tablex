@@ -33,3 +33,14 @@ clean:
 	rm -f *.o
 
 .PHONY: all clean
+
+# dependencies
+
+dict.o: dict.c dict.h tst.h
+edit.o: edit.c edit.h dict.h tst.h
+graph.o: graph.c edit.h dict.h tst.h
+ibus.o: ibus.c config.h
+main.o: main.c dict.h tst.h edit.h
+tst.o: tst.c tst.h
+utf.o: utf.c utf.h
+utf_test.o: utf_test.c utf.h
