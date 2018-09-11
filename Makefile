@@ -13,17 +13,23 @@ CFLAGS+=-O2 -flto
 LDFLAGS+=-O2 -flto
 VALACFLAGS+=-X -O2 -X -flto
 
-all: curses ibus
+all: curses ibus graph
 
 curses: tst.o dict.o edit.o main.o
-	$(CC) -o $@ $(LDFLAGS) tst.o dict.o edit.o main.o \
+	$(CC) -o $@ $(LDFLAGS) $^ \
 		`pkg-config --libs ncursesw`
 
 ibus: ibus.o tst.o dict.o edit.o
-	$(CC) -o $@ $(LDFLAGS) tst.o dict.o edit.o ibus.o \
+	$(CC) -o $@ $(LDFLAGS) $^ \
 		`pkg-config --libs glib-2.0 ibus-1.0`
 
-ibus.o: ibus.vala
-	$(VALAC) -c $(VALACFLAGS) ibus.vala config.vapi edit.vapi
+graph: graph.o tst.o dict.o edit.o
+	$(CC) -o $@ $(LDFLAGS) $^
 
-.PHONY: all
+ibus.o: ibus.vala config.vapi edit.vapi
+	$(VALAC) -c $(VALACFLAGS) $^
+
+clean:
+	rm -f *.o
+
+.PHONY: all clean
