@@ -24,7 +24,6 @@ struct tnode_leaf {
 };
 
 struct cnode {
-	struct tnode *parent;
 	struct cnode *prev, *next;
 	char *kseq, *cseq;
 };

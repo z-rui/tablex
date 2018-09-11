@@ -52,8 +52,6 @@ dict_add_leaf(struct dict *d, struct cnode *cn, struct tnode_leaf *tn)
 {
 	struct cnode *prev_cn, *next_cn;
 
-	cn->parent = (struct tnode *) tn;
-
 	if (tn->list.head) {
 		prev_cn = tn->list.tail;
 		next_cn = prev_cn->next;
@@ -154,7 +152,6 @@ void dict_load_line(struct dict *d, const char *line, size_t len)
 	}
 	do {
 		cn = malloc(sizeof *cn);
-		cn->parent = (struct tnode *) tn;
 		cn->kseq = kseq;
 		cn->cseq = cseq;
 		dict_add_leaf(d, cn, tn);
