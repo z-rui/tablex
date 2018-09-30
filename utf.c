@@ -21,7 +21,7 @@ int utf8_decode(const char *s, unsigned *out)
 		len = 4;
 	else
 		return 0;	/* invalid */
-	*out = ch & (0x3f >> len);
+	*out = ch & (0x7f >> len);
 	for (i = 2; i <= len; i++) {
 		ch = *s++;
 		if ((ch & 0xc0) != 0x80)
