@@ -2,7 +2,7 @@ CC=gcc
 CFLAGS=-Wall -ggdb3 -pipe
 CFLAGS+=`pkg-config --cflags ncursesw glib-2.0 ibus-1.0`
 
-VALAC=valac-0.36
+VALAC=valac-0.46
 VALACFLAGS=--save-temps --pkg=glib-2.0 --pkg=ibus-1.0
 
 # Debug
@@ -39,7 +39,7 @@ clean:
 dict.o: dict.c dict.h tst.h
 edit.o: edit.c edit.h dict.h tst.h
 graph.o: graph.c edit.h dict.h tst.h
-ibus.o: ibus.c config.h
+ibus.o: ibus.vala config.h
 main.o: main.c dict.h tst.h edit.h
 tst.o: tst.c tst.h
 utf.o: utf.c utf.h

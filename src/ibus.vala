@@ -167,6 +167,7 @@ namespace TableX {
 		}
 		public override bool process_key_event(uint keyval, uint keycode, uint state)
 		{
+			state &= ~IBus.ModifierType.MOD2_MASK;  // ignore numlock
 			state &= ~IBus.ModifierType.SHIFT_MASK;
 			if ((state & IBus.ModifierType.RELEASE_MASK) != 0 &&
 				(keyval == IBus.Shift_L || keyval == IBus.Shift_R)
@@ -243,7 +244,7 @@ public int main(string[] args)
 
 	var ibus = new IBus.Bus();
 	if (!ibus.is_connected()) {
-		stderr.printf("Cannot connect to ibus-daemon!");
+		stderr.printf("Cannot connect to ibus-daemon!\n");
 		return 1;
 	}
 	ibus.disconnected.connect(() => { IBus.quit(); });
