@@ -24,7 +24,8 @@ enddef;
 
 def drawnodes =
   for i = 1 upto N:
-    circleit.Z[i](char(K[i]) infont "cmtex10");
+    circleit.Z[i](if known mplib: TEX("\tentex\mathstrut\char"&decimal(K[i]))
+                  else: char(K[i]) infont "cmtex10" fi);
     Z[i].c = z[i];
     drawunboxed(Z[i]);
   endfor
