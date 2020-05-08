@@ -86,7 +86,7 @@ namespace TableX {
 					keyval = (keyval == '0') ? 9 : keyval - '1';
 					if (keyval >= kCandidateCount)
 						return;
-					editor.select(keyval - '1');
+					editor.select(keyval);
 					break;
 				case IBus.Escape:
 					editor.reset();
