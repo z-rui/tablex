@@ -2,6 +2,10 @@ using Config;
 
 namespace TableX {
 	class Engine : IBus.Engine {
+		const uint kCandidateCount = 10;
+		const uint kHintColor = 0xff9515b5U;
+		const int kOrientation = IBus.Orientation.SYSTEM;
+
 		IBus.LookupTable lookup_table;
 		IBus.PropList plist;
 		IBus.Property prop_state;
@@ -29,7 +33,12 @@ namespace TableX {
 		uint lastkey;
 
 		construct {
-			lookup_table = new IBus.LookupTable(10, 0, false, false);
+			lookup_table = new IBus.LookupTable(
+				kCandidateCount,
+				/*cursor_pos=*/0,
+				/*cursor_visible=*/false,
+				/*round=*/false);
+			lookup_table.set_orientation(kOrientation);
 			prepare_editor();
 			prepare_properties();
 			is_chinese = true;
@@ -193,7 +202,8 @@ namespace TableX {
 			var end = start + hint.char_count();
 
 			IBus.Text ibustext = new IBus.Text.from_string(text + hint);
-			IBus.Attribute attr = IBus.attr_foreground_new(0xff9515b5U, start, end);
+			IBus.Attribute attr = IBus.attr_foreground_new(
+				kHintColor, start, end);
 			ibustext.append_attribute(attr.get_attr_type(),
 				attr.get_value(),
 				attr.get_start_index(),
