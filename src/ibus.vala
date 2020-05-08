@@ -64,7 +64,7 @@ namespace TableX {
 		{
 			plist = new IBus.PropList();
 			prop_state = new IBus.Property(
-				"state", IBus.PropType.NORMAL,
+				"InputMode", IBus.PropType.NORMAL,
 				new IBus.Text.from_static_string(""), null,
 				new IBus.Text.from_static_string("Click to switch Chinese/English mode"),
 				true, true,
