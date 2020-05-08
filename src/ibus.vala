@@ -82,11 +82,11 @@ namespace TableX {
 			switch (keyval) {
 				case '1': case '2': case '3': case '4':
 				case '5': case '6': case '7': case '8':
-				case '9':
+				case '9': case '0':
+					keyval = (keyval == '0') ? 9 : keyval - '1';
+					if (keyval >= kCandidateCount)
+						return;
 					editor.select(keyval - '1');
-					break;
-				case '0':
-					editor.select(9);
 					break;
 				case IBus.Escape:
 					editor.reset();
