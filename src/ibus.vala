@@ -5,6 +5,7 @@ namespace TableX {
 		const uint kCandidateCount = 10;
 		const uint kHintColor = 0xff9515b5U;
 		const int kOrientation = IBus.Orientation.SYSTEM;
+		const bool kInitInputMode = true;
 
 		IBus.LookupTable lookup_table;
 		IBus.PropList plist;
@@ -41,7 +42,7 @@ namespace TableX {
 			lookup_table.set_orientation(kOrientation);
 			prepare_editor();
 			prepare_properties();
-			is_chinese = true;
+			is_chinese = kInitInputMode;
 		}
 		void prepare_editor()
 		{
